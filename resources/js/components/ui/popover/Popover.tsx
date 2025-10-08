@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback, ReactNode } from "react";
+import React, { useState, useRef, useEffect, useCallback, ReactNode } from "react";
 import { CloseLineIcon } from "../../../icons";
 
 interface PopoverAction {
@@ -141,7 +141,7 @@ const Popover: React.FC<PopoverProps> = ({
 
   const getArrowClasses = () => {
     const baseArrow = "absolute w-3 h-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 transform rotate-45";
-    
+
     switch (position) {
       case "top":
         return `${baseArrow} -bottom-1.5 left-1/2 -translate-x-1/2 border-t-0 border-l-0`;
@@ -180,7 +180,7 @@ const Popover: React.FC<PopoverProps> = ({
           }}
         >
           <div className={getArrowClasses()} />
-          
+
           {(title || showCloseButton) && (
             <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
               {title && (
@@ -217,8 +217,8 @@ const Popover: React.FC<PopoverProps> = ({
                   }}
                   className={`
                     px-4 py-2 text-sm font-medium rounded-lg transition-colors
-                    ${action.variant === "primary" 
-                      ? "bg-brand-500 text-white hover:bg-brand-600" 
+                    ${action.variant === "primary"
+                      ? "bg-brand-500 text-white hover:bg-brand-600"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
                     }
                   `}

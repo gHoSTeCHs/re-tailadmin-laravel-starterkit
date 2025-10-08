@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface ToggleProps {
   checked?: boolean;
@@ -20,19 +20,19 @@ const Toggle: React.FC<ToggleProps> = ({
   className = "",
 }) => {
   const [internalChecked, setInternalChecked] = useState(false);
-  
+
   const isControlled = controlledChecked !== undefined;
   const checked = isControlled ? controlledChecked : internalChecked;
 
   const handleToggle = () => {
     if (disabled) return;
-    
+
     const newChecked = !checked;
-    
+
     if (!isControlled) {
       setInternalChecked(newChecked);
     }
-    
+
     onChange?.(newChecked);
   };
 
@@ -66,15 +66,15 @@ const Toggle: React.FC<ToggleProps> = ({
           disabled={disabled}
           onClick={handleToggle}
           className={`
-            relative inline-flex ${currentSize.track} flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
+            relative inline-flex ${currentSize.track} flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent
             transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2
             dark:focus:ring-offset-gray-900
-            ${checked 
-              ? "bg-brand-500" 
+            ${checked
+              ? "bg-brand-500"
               : "bg-gray-200 dark:bg-gray-700"
             }
-            ${disabled 
-              ? "cursor-not-allowed opacity-50" 
+            ${disabled
+              ? "cursor-not-allowed opacity-50"
               : "hover:bg-opacity-90"
             }
           `}
@@ -86,7 +86,7 @@ const Toggle: React.FC<ToggleProps> = ({
             `}
           />
         </button>
-        
+
         {(label || description) && (
           <div className="ml-3">
             {label && (

@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, AngleLeftIcon, AngleRightIcon } from '../../../icons';
 import { ChevronRightIcon } from 'lucide-react';
+import React from 'react';
 
 interface PaginationProps {
 	currentPage: number;

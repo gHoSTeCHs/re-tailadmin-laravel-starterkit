@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import { DropdownItem } from '@/components/ui/dropdown';
 import { MoreDotIcon } from "../../icons";
 import CountryMap from "./CountryMap";
 

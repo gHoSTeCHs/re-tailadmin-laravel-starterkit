@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, ReactNode } from "react";
+import React, { useState, useRef, useEffect, ReactNode } from "react";
 
 interface TooltipProps {
   content: string;
@@ -90,7 +90,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
   const getArrowClasses = () => {
     const baseArrow = "absolute w-2 h-2 bg-gray-900 dark:bg-gray-700 transform rotate-45";
-    
+
     switch (position) {
       case "top":
         return `${baseArrow} -bottom-1 left-1/2 -translate-x-1/2`;

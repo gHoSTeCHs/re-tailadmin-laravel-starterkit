@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { cn } from '../../../utils/cn';
+import { cn } from '@/utils/cn.ts';
 
 interface ListProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface ListProps {
 
 export const List = ({ children, className, ordered = false }: ListProps) => {
   const Component = ordered ? 'ol' : 'ul';
-  
+
   return (
     <Component
       className={cn(
