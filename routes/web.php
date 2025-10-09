@@ -7,10 +7,6 @@ Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
 
-Route::get('/form-elements', function () {
-    return Inertia::render('Forms/FormElements');
-})->name('home');
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');

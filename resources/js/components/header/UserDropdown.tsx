@@ -1,12 +1,17 @@
 import { DropdownItem } from '@/components/ui/dropdown';
+import { logout } from '@/routes';
 import { SharedData } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { Dropdown } from '../ui/dropdown/Dropdown';
 
 export default function UserDropdown() {
     const { auth } = usePage<SharedData>().props;
     const [isOpen, setIsOpen] = useState(false);
+
+    const handleLogout = () => {
+        router.flushAll();
+    };
 
     function toggleDropdown() {
         setIsOpen(!isOpen);
@@ -143,8 +148,9 @@ export default function UserDropdown() {
                     </li>
                 </ul>
                 <Link
-                    href={'/login'}
+                    href={logout()}
                     className="group mt-3 flex items-center gap-3 rounded-lg px-3 py-2 text-theme-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
+                    onClick={handleLogout}
                 >
                     <svg
                         className="fill-gray-500 group-hover:fill-gray-700 dark:group-hover:fill-gray-300"
