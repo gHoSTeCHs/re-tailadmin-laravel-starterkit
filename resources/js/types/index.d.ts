@@ -23,7 +23,8 @@ export interface NavItem {
 }
 
 export interface SharedData {
-    name: string;
+    first_name: string;
+    last_name: string;
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
@@ -32,7 +33,9 @@ export interface SharedData {
 
 export interface User {
     id: number;
-    name: string;
+    first_name: string;
+    last_name: string;
+    name: string; // Computed accessor that combines first_name + last_name
     email: string;
     avatar?: string;
     email_verified_at: string | null;
