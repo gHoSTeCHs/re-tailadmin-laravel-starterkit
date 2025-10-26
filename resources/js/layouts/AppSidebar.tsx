@@ -1,21 +1,7 @@
+import { useSidebar } from '@/context/SidebarContext';
 import { Link, usePage } from '@inertiajs/react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-
-import { useSidebar } from '@/context/SidebarContext';
-import {
-    BoxCubeIcon,
-    CalenderIcon,
-    ChevronDownIcon,
-    GridIcon,
-    HorizontaLDots,
-    ListIcon,
-    PageIcon,
-    PieChartIcon,
-    PlugInIcon,
-    TableIcon,
-    UserCircleIcon,
-} from '../icons';
-import SidebarWidget from './SidebarWidget';
+import { ChevronDownIcon, GridIcon, HorizontaLDots } from '../icons';
 
 type NavItem = {
     name: string;
@@ -28,77 +14,19 @@ const navItems: NavItem[] = [
     {
         icon: <GridIcon />,
         name: 'Dashboard',
-        subItems: [{ name: 'Ecommerce', path: '/dashboard', pro: false }],
-    },
-    {
-        icon: <CalenderIcon />,
-        name: 'Calendar',
-        path: '/calendar',
-    },
-    {
-        icon: <UserCircleIcon />,
-        name: 'User Profile',
-        path: '/settings/profile',
-    },
-    {
-        name: 'Forms',
-        icon: <ListIcon />,
-        subItems: [
-            { name: 'Form Elements', path: '/form-elements', pro: false },
-        ],
-    },
-    {
-        name: 'Tables',
-        icon: <TableIcon />,
-        subItems: [{ name: 'Basic Tables', path: '/basic-tables', pro: false }],
-    },
-    {
-        name: 'Pages',
-        icon: <PageIcon />,
-        subItems: [
-            { name: 'Blank Page', path: '/blank', pro: false },
-            { name: '404 Error', path: '/error-404', pro: false },
-            { name: 'Coming Soon', path: '/coming-soon', pro: false },
-            { name: 'New Components', path: '/new-components', pro: false },
-            { name: 'Cards', path: '/cards', pro: false },
-        ],
+        path: '/dashboard',
     },
 ];
 
 const othersItems: NavItem[] = [
-    {
-        icon: <PieChartIcon />,
-        name: 'Charts',
-        subItems: [
-            { name: 'Line Chart', path: '/line-chart', pro: false },
-            { name: 'Bar Chart', path: '/bar-chart', pro: false },
-        ],
-    },
-    {
-        icon: <BoxCubeIcon />,
-        name: 'UI Elements',
-        subItems: [
-            { name: 'Alerts', path: '/alerts', pro: false },
-            { name: 'Avatar', path: '/avatars', pro: false },
-            { name: 'Badge', path: '/badge', pro: false },
-            { name: 'Buttons', path: '/buttons', pro: false },
-            { name: 'Lists', path: '/lists', pro: false },
-            { name: 'Tabs', path: '/tabs', pro: false },
-            { name: 'Ribbons', path: '/ribbons', pro: false },
-            { name: 'Dropdowns', path: '/dropdowns', pro: false },
-            { name: 'Progress Bars', path: '/progress-bars', pro: false },
-            { name: 'Images', path: '/images', pro: false },
-            { name: 'Videos', path: '/videos', pro: false },
-        ],
-    },
-    {
-        icon: <PlugInIcon />,
-        name: 'Authentication',
-        subItems: [
-            { name: 'Sign In', path: '/login', pro: false },
-            { name: 'Sign Up', path: '/register', pro: false },
-        ],
-    },
+    // {
+    //     icon: <PieChartIcon />,
+    //     name: 'Charts',
+    //     subItems: [
+    //         { name: 'Line Chart', path: '/line-chart', pro: false },
+    //         { name: 'Bar Chart', path: '/bar-chart', pro: false },
+    //     ],
+    // },
 ];
 
 const AppSidebar: React.FC = () => {
@@ -395,9 +323,9 @@ const AppSidebar: React.FC = () => {
                         </div>
                     </div>
                 </nav>
-                {isExpanded || isHovered || isMobileOpen ? (
+                {/* {isExpanded || isHovered || isMobileOpen ? (
                     <SidebarWidget />
-                ) : null}
+                ) : null} */}
             </div>
         </aside>
     );

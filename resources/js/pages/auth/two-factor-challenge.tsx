@@ -1,17 +1,18 @@
-import InputError from '@/components/input-error';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import Input from '@/components/form/input/InputField';
+import InputError from '@/components/form/InputError';
+import Button from '@/components/ui/button/Button';
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSlot,
 } from '@/components/ui/input-otp';
 import { OTP_MAX_LENGTH } from '@/hooks/use-two-factor-auth';
-import AuthLayout from '@/layouts/auth-layout';
+import AuthLayout from '@/layouts/AuthPageLayout.tsx';
 import { store } from '@/routes/two-factor/login';
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, Link } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 import { useMemo, useState } from 'react';
+import { ChevronLeftIcon } from '../../icons';
 
 export default function TwoFactorChallenge() {
     const [showRecoveryInput, setShowRecoveryInput] = useState<boolean>(false);
@@ -46,85 +47,128 @@ export default function TwoFactorChallenge() {
     };
 
     return (
-        <AuthLayout
-            title={authConfigContent.title}
-            description={authConfigContent.description}
-        >
+        <AuthLayout>
             <Head title="Two-Factor Authentication" />
 
-            <div className="space-y-6">
-                <Form
-                    {...store.form()}
-                    className="space-y-4"
-                    resetOnError
-                    resetOnSuccess={!showRecoveryInput}
-                >
-                    {({ errors, processing, clearErrors }) => (
-                        <>
-                            {showRecoveryInput ? (
-                                <>
-                                    <Input
-                                        name="recovery_code"
-                                        type="text"
-                                        placeholder="Enter recovery code"
-                                        autoFocus={showRecoveryInput}
-                                        required
-                                    />
-                                    <InputError
-                                        message={errors.recovery_code}
-                                    />
-                                </>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center space-y-3 text-center">
-                                    <div className="flex w-full items-center justify-center">
-                                        <InputOTP
-                                            name="code"
-                                            maxLength={OTP_MAX_LENGTH}
-                                            value={code}
-                                            onChange={(value) => setCode(value)}
-                                            disabled={processing}
-                                            pattern={REGEXP_ONLY_DIGITS}
-                                        >
-                                            <InputOTPGroup>
-                                                {Array.from(
-                                                    { length: OTP_MAX_LENGTH },
-                                                    (_, index) => (
-                                                        <InputOTPSlot
-                                                            key={index}
-                                                            index={index}
-                                                        />
-                                                    ),
-                                                )}
-                                            </InputOTPGroup>
-                                        </InputOTP>
-                                    </div>
-                                    <InputError message={errors.code} />
-                                </div>
-                            )}
+            <div className="flex flex-1 flex-col">
+                <div className="mx-auto w-full max-w-md pt-10">
+                    <Link
+                        href="/"
+                        className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                    >
+                        <ChevronLeftIcon className="size-5" />
+                        Back to Home
+                    </Link>
+                </div>
+                <div className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center">
+                    <div>
+                        <div className="mb-5 sm:mb-8">
+                            <h1 className="mb-2 text-title-sm font-semibold text-gray-800 sm:text-title-md dark:text-white/90">
+                                {authConfigContent.title}
+                            </h1>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">
+                                {authConfigContent.description}
+                            </p>
+                        </div>
 
-                            <Button
-                                type="submit"
-                                className="w-full"
-                                disabled={processing}
+                        <div>
+                            <Form
+                                {...store.form()}
+                                className="space-y-6"
+                                resetOnError
+                                resetOnSuccess={!showRecoveryInput}
                             >
-                                Continue
-                            </Button>
+                                {({ errors, processing, clearErrors }) => (
+                                    <>
+                                        {showRecoveryInput ? (
+                                            <div>
+                                                <Input
+                                                    name="recovery_code"
+                                                    type="text"
+                                                    placeholder="Enter recovery code"
+                                                    // autoFocus={showRecoveryInput}
+                                                />
+                                                <InputError
+                                                    message={
+                                                        errors.recovery_code
+                                                    }
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div className="flex flex-col items-center justify-center space-y-3 text-center">
+                                                <div className="flex w-full items-center justify-center">
+                                                    <InputOTP
+                                                        name="code"
+                                                        maxLength={
+                                                            OTP_MAX_LENGTH
+                                                        }
+                                                        value={code}
+                                                        onChange={(value) =>
+                                                            setCode(value)
+                                                        }
+                                                        disabled={processing}
+                                                        pattern={
+                                                            REGEXP_ONLY_DIGITS
+                                                        }
+                                                    >
+                                                        <InputOTPGroup>
+                                                            {Array.from(
+                                                                {
+                                                                    length: OTP_MAX_LENGTH,
+                                                                },
+                                                                (_, index) => (
+                                                                    <InputOTPSlot
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                        index={
+                                                                            index
+                                                                        }
+                                                                    />
+                                                                ),
+                                                            )}
+                                                        </InputOTPGroup>
+                                                    </InputOTP>
+                                                </div>
+                                                <InputError
+                                                    message={errors.code}
+                                                />
+                                            </div>
+                                        )}
 
-                            <div className="text-center text-sm text-muted-foreground">
-                                <span>or you can </span>
-                                <button
-                                    type="button"
-                                    className="cursor-pointer text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
-                                    onClick={() =>
-                                        toggleRecoveryMode(clearErrors)
-                                    }
-                                >
-                                    {authConfigContent.toggleText}
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </Form>
+                                        <div>
+                                            <Button
+                                                type="submit"
+                                                className="w-full"
+                                                size="sm"
+                                                disabled={processing}
+                                            >
+                                                {processing
+                                                    ? 'Verifying...'
+                                                    : 'Continue'}
+                                            </Button>
+                                        </div>
+
+                                        <div className="text-center text-sm font-normal text-gray-700 dark:text-gray-400">
+                                            or you can{' '}
+                                            <button
+                                                type="button"
+                                                className="text-primary-600 decoration-primary-300 dark:text-primary-400 dark:decoration-primary-500 cursor-pointer underline underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current"
+                                                onClick={() =>
+                                                    toggleRecoveryMode(
+                                                        clearErrors,
+                                                    )
+                                                }
+                                            >
+                                                {authConfigContent.toggleText}
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </Form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </AuthLayout>
     );

@@ -149,13 +149,7 @@ export default function SignInForm() {
                                                 name="remember"
                                                 tabIndex={3}
                                                 checked={false}
-                                                onChange={function (
-                                                    checked: boolean,
-                                                ): void {
-                                                    throw new Error(
-                                                        'Function not implemented.',
-                                                    );
-                                                }}
+                                                onChange={() => {}}
                                             />
                                             <Label
                                                 htmlFor="remember"
